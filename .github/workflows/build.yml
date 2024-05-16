@@ -12,7 +12,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            local packages=('git-core' 'gnupg' 'flex' 'bison' 'build-essential' 'zip' 'curl' 'zlib1g-dev' 'libc6-dev-i386' 'libncurses5' 'lib32ncurses5-dev' 'x11proto-core-dev' 'libx11-dev' 'lib32z1-dev' 'libgl1-mesa-dev' 'libxml2-utils' 'xsltproc' 'unzip' 'openssl' 'libssl-dev' 'fontconfig' 'jq' 'openjdk-8-jdk' 'gperf' 'python-is-python3' 'ccache' 'sshpass')
+            packages=('git-core' 'gnupg' 'flex' 'bison' 'build-essential' 'zip' 'curl' 'zlib1g-dev' 'libc6-dev-i386' 'libncurses5' 'lib32ncurses5-dev' 'x11proto-core-dev' 'libx11-dev' 'lib32z1-dev' 'libgl1-mesa-dev' 'libxml2-utils' 'xsltproc' 'unzip' 'openssl' 'libssl-dev' 'fontconfig' 'jq' 'openjdk-8-jdk' 'gperf' 'python-is-python3' 'ccache' 'sshpass')
             echo "Updating package lists..."
             sudo apt-get update -y || apt-get update -y
             echo "Installing dependencies..."
