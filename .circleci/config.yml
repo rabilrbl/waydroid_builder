@@ -9,4 +9,4 @@ jobs:
       - checkout
       - run:
          name: Build ROM
-         command: chmod +x _build.sh && ./_build.sh
+         command: chmod +x build.sh && ./build.sh
