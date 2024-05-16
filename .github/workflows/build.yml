@@ -1,0 +1,36 @@
+name: Build Waydroid
+
+on:
+  workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    
+        steps:
+        - uses: actions/checkout@v4
+
+        - name: Install dependencies
+          run: |
+            local packages=('git-core' 'gnupg' 'flex' 'bison' 'build-essential' 'zip' 'curl' 'zlib1g-dev' 'libc6-dev-i386' 'libncurses5' 'lib32ncurses5-dev' 'x11proto-core-dev' 'libx11-dev' 'lib32z1-dev' 'libgl1-mesa-dev' 'libxml2-utils' 'xsltproc' 'unzip' 'openssl' 'libssl-dev' 'fontconfig' 'jq' 'openjdk-8-jdk' 'gperf' 'python-is-python3' 'ccache' 'sshpass')
+            echo "Updating package lists..."
+            sudo apt-get update -y || apt-get update -y
+            echo "Installing dependencies..."
+            sudo apt-get install -y "${packages[@]}" || apt-get install -y "${packages[@]}"
+            # Download latest repo from Google Storage
+            sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /usr/local/bin/repo && sudo chmod a+x /usr/local/bin/repo
+            export USE_CCACHE=1
+            export CCACHE_EXEC=$(which ccache)
+            echo "Dependencies check complete."
+
+        - name: Start build
+          id: build
+          run: |
+            echo "home=$HOME" >> $GITHUB_OUTPUT
+            chmod +x build.sh
+            ./build.sh
+
+        - name: Upload artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            path: ${{ steps.build.outputs.home }}/*.img
