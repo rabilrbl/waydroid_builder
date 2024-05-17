@@ -3,7 +3,6 @@
 # Download latest repo from Google Storage
 # sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /usr/local/bin/repo && sudo chmod a+x /usr/local/bin/repo
 
-
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 git config --global user.name "github-actions[bot]"
 git config --global color.ui true
